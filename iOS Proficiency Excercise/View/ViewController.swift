@@ -145,8 +145,13 @@ extension ViewController: UITableViewDelegate,UITableViewDataSource{
     //MARK: tableview - heightForRowAt
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
       
+        if mainData?.rows?[indexPath.row].title == nil
+        {
+            return 0
+        } else {
         let height = calculateHeight(inString: mainData?.rows?[indexPath.row].description ?? "")
         return (height + 210)
+        }
     }
     
     //MARK: tableview - didSelectRowAt
