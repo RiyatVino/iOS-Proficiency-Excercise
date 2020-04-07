@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-iOS Proficiency Excercise/Pods-iOS Proficiency Excercise-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Concorde/Concorde.framework
+${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework
+${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework
