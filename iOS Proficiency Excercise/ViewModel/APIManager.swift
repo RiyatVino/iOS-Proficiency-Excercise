@@ -5,38 +5,7 @@
 //  Created by Vino on 4/7/20.
 //  Copyright © 2020 Vino. All rights reserved.
 //
-/*
-//MARK:- API Service call
-func getData()
-{
-    var request = URLRequest(url: URL(string: jsonURLString)!,timeoutInterval: Double.infinity)
-    
-    request.httpMethod = "GET"
-    
-    let task = URLSession.shared.dataTask(with: request) { data, response, error in
-        guard let data = data else {
-            print(String(describing: error))
-            return
-        }
-        let str = String(decoding: data, as: UTF8.self)
-        let jsonData = str.data(using: .utf8)!
-        
-        do {
-            let jsonDecoder = JSONDecoder()
-            self.mainData = try jsonDecoder.decode(MainModel.self, from: jsonData)
-            DispatchQueue.main.async {
-                self.navigationItem.title = self.mainData?.title
-                self.tableView.reloadData()
-                self.refreshControl.endRefreshing()
-                
-            }
-        } catch {
-            print("Unexpected error: \(error).")
-        }
-    }
-    task.resume()
-}
-*/
+
 import UIKit
 
 class APIManager: NSObject {

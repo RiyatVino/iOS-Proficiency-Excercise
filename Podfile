@@ -6,7 +6,7 @@ target 'iOS Proficiency Excercise' do
   use_frameworks!
  
   # Pods for iOS Proficiency Excercise
-  #pod 'SwiftLint'
+  pod 'SwiftLint'
   pod 'ReachabilitySwift'
   pod 'SDWebImage',  '~> 5.0'
   pod 'Concorde/Core'
