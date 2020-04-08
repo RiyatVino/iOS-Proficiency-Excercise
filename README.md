@@ -69,7 +69,7 @@ Xcode 11.3.1
 Swift 5
 ```
 ```
-iOS 12.0 & later
+iOS 13.0 & later
 ```
 
 ### Podfiles Used
