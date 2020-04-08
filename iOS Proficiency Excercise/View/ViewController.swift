@@ -12,14 +12,38 @@ import Foundation
 
 class ViewController: UIViewController {
         
-    //MARK:- RefreshControlariable Declaration
+    //MARK:- Variable Declarations
     let cellIdentifier = "RowsTableViewCell"
     let noDataText = "No data found!"
     let network: NetworkManager = NetworkManager.sharedInstance
     private let refreshControl = UIRefreshControl()
     var mainData: MainModel?
     var tableView = UITableView.init(frame: CGRect.zero, style: UITableView.Style.grouped)
+    var noDataLabel = UILabel()
+    var indicator = UIActivityIndicatorView()
+
+    //MARK:- setupactivityIndicator
+    func activityIndicator() {
+        indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        indicator.style = UIActivityIndicatorView.Style.gray
+        indicator.center = self.view.center
+        self.view.addSubview(indicator)
+    }
     
+    //MARK: startAnimating
+    func startAnimating() {
+        activityIndicator()
+        indicator.startAnimating()
+        indicator.backgroundColor = .white
+    }
+    
+    //MARK: stopAnimating
+    func stopAnimating() {
+        indicator.stopAnimating()
+        indicator.hidesWhenStopped = true
+    }
+ 
+
     
     //MARK:- setupTableView
     func setupTableView(){
@@ -30,16 +54,17 @@ class ViewController: UIViewController {
         tableView.delegate = self
         tableView.backgroundColor = UIColor.clear
         tableView.register(RowsTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
-        let noDataLabel: UILabel     = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height:tableView.bounds.size.height))
-        noDataLabel.text             = noDataText
-        noDataLabel.textColor        = UIColor.black
-        noDataLabel.textAlignment    = .center
+        noDataLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height:tableView.bounds.size.height))
+        noDataLabel.text = noDataText
+        noDataLabel.textColor = UIColor.black
+        noDataLabel.textAlignment = .center
+        noDataLabel.isHidden = true
         tableView.backgroundView = noDataLabel
         tableView.separatorStyle = .none
-
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.addRefreshControll(actionTarget: self, action: #selector(refreshUpdateData))
 
-        
         self.view.addSubview(tableView)
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 8),
@@ -76,7 +101,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Refresh", style: .plain, target: self, action: #selector(self.refreshData))
-
+        
+        activityIndicator()
         NetworkManager.isUnreachable { _ in
             self.showAlert("Alert", "No internet Connection","Dismiss")
         }
@@ -92,6 +118,7 @@ class ViewController: UIViewController {
     //MARK:- getData API Service call
     func getData()
     {
+        startAnimating()
         APIManager.sharedInstance.getData(onSuccess: { data in
             DispatchQueue.main.async {
                 do {
@@ -101,6 +128,7 @@ class ViewController: UIViewController {
                         self.navigationItem.title = self.mainData?.title
                         self.tableView.reloadData()
                         self.refreshControl.endRefreshing()
+                        self.stopAnimating()
                     }
                 } catch {
                     self.showAlert("Error", error.localizedDescription,"Dismiss")
@@ -122,7 +150,11 @@ extension ViewController: UITableViewDelegate,UITableViewDataSource{
     
     //MARK: tableview : numberOfRowsInSection
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+        if mainData?.rows?.count == 0 {
+            noDataLabel.isHidden = false
+        } else {
+            noDataLabel.isHidden = true
+        }
         return mainData?.rows?.count ?? 0
     }
     
@@ -149,8 +181,7 @@ extension ViewController: UITableViewDelegate,UITableViewDataSource{
         {
             return 0
         } else {
-        let height = calculateHeight(inString: mainData?.rows?[indexPath.row].description ?? "")
-        return (height + 210)
+            return UITableView.automaticDimension
         }
     }
     

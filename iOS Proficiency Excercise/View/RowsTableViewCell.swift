@@ -56,26 +56,32 @@ class RowsTableViewCell: UITableViewCell {
     }()
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
         self.contentView.addSubview(mainBgView)
         mainBgView.topAnchor.constraint(equalTo:self.contentView.topAnchor,constant: 8).isActive = true
         mainBgView.leadingAnchor.constraint(equalTo:self.contentView.leadingAnchor,constant: 8).isActive = true
         mainBgView.trailingAnchor.constraint(equalTo:self.contentView.trailingAnchor,constant: -8).isActive = true
         mainBgView.bottomAnchor.constraint(equalTo:self.contentView.bottomAnchor,constant: -8).isActive = true
+        
         mainBgView.addSubview(titleLabel)
         titleLabel.topAnchor.constraint(equalTo:mainBgView.topAnchor).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo:mainBgView.leadingAnchor).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo:mainBgView.trailingAnchor).isActive = true
         titleLabel.heightAnchor.constraint(equalToConstant:40).isActive = true
+        
         mainBgView.addSubview(imageRefView)
         let leftSpacing = (self.contentView.frame.size.width/3)/2
         imageRefView.topAnchor.constraint(equalTo:titleLabel.bottomAnchor,constant: 0).isActive = true
         imageRefView.leadingAnchor.constraint(equalTo:mainBgView.leadingAnchor,constant: leftSpacing).isActive = true
         imageRefView.trailingAnchor.constraint(equalTo:mainBgView.trailingAnchor,constant: -leftSpacing).isActive = true
         imageRefView.heightAnchor.constraint(equalToConstant:150).isActive = true
-        self.contentView.addSubview(descriptionLabel)
+        
+        mainBgView.addSubview(descriptionLabel)
         descriptionLabel.topAnchor.constraint(equalTo:imageRefView.bottomAnchor,constant: 0).isActive = true
         descriptionLabel.leadingAnchor.constraint(equalTo:mainBgView.leadingAnchor,constant: 8).isActive = true
         descriptionLabel.trailingAnchor.constraint(equalTo:mainBgView.trailingAnchor,constant: -8).isActive = true
+        descriptionLabel.bottomAnchor.constraint(equalTo:mainBgView.bottomAnchor,constant: -8).isActive = true
+
     }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
