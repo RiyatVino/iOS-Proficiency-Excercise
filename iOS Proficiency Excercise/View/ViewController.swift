@@ -25,7 +25,7 @@ class ViewController: UIViewController {
     //MARK:- setupactivityIndicator
     func activityIndicator() {
         indicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        indicator.style = UIActivityIndicatorView.Style.gray
+        indicator.style = UIActivityIndicatorView.Style.medium
         indicator.center = self.view.center
         self.view.addSubview(indicator)
     }
