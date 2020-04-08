@@ -212,7 +212,7 @@ extension ViewController: UITableViewDelegate,UITableViewDataSource{
 //MARK:- tableview - for RefreshControl
 public extension UITableView {
 
-    private var _refreshControl: RefreshControl? { return refreshControl as? RefreshControl }
+    private var myRefreshControl: RefreshControl? { return refreshControl as? RefreshControl }
 
     func addRefreshControll(actionTarget: AnyObject?, action: Selector, replaceIfExist: Bool = false) {
         if !replaceIfExist && refreshControl != nil { return }
@@ -220,7 +220,7 @@ public extension UITableView {
     }
 
     func scrollToTopAndShowRunningRefreshControl(changeContentOffsetWithAnimation: Bool = false) {
-        _refreshControl?.refreshActivityIndicatorView()
+        myRefreshControl?.refreshActivityIndicatorView()
         guard   let refreshControl = refreshControl,
                 contentOffset.y != -refreshControl.frame.height else { return }
         setContentOffset(CGPoint(x: 0, y: -(refreshControl.frame.height + 75)), animated: changeContentOffsetWithAnimation)
@@ -233,14 +233,14 @@ public extension UITableView {
 
     func startRefreshing() {
         guard canStartRefreshing else { return }
-        _refreshControl?.generateRefreshEvent()
+        myRefreshControl?.generateRefreshEvent()
     }
 
     func pullAndRefresh() {
         guard canStartRefreshing else { return }
         scrollToTopAndShowRunningRefreshControl(changeContentOffsetWithAnimation: true)
-        _refreshControl?.generateRefreshEvent()
+        myRefreshControl?.generateRefreshEvent()
     }
 
-    func endRefreshing(deadline: DispatchTime? = nil) { _refreshControl?.endRefreshing(deadline: deadline) }
+    func endRefreshing(deadline: DispatchTime? = nil) { myRefreshControl?.endRefreshing(deadline: deadline) }
 }
