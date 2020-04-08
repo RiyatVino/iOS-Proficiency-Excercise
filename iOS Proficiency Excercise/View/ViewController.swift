@@ -164,13 +164,16 @@ extension ViewController: UITableViewDelegate,UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! RowsTableViewCell
         cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         cell.selectionStyle = .none
-        
-        let url = URL(string: "\(mainData?.rows?[indexPath.row].imageHref ?? "")")
-        let imagep = #imageLiteral(resourceName: "placeholderimage")
-        cell.imageRefView.sd_setImage(with: url, placeholderImage: imagep, options: [], completed: nil)
-        cell.titleLabel.text = mainData?.rows?[indexPath.row].title?.uppercased()
-        cell.descriptionLabel.text = mainData?.rows?[indexPath.row].description
-        
+        if mainData?.rows?[indexPath.row].title != nil
+        {
+            let url = URL(string: "\(mainData?.rows?[indexPath.row].imageHref ?? "")")
+            let imagep = #imageLiteral(resourceName: "placeholderimage")
+            cell.imageRefView.sd_setImage(with: url, placeholderImage: imagep, options: [], completed: nil)
+            cell.titleLabel.text = mainData?.rows?[indexPath.row].title?.uppercased()
+            cell.descriptionLabel.text = mainData?.rows?[indexPath.row].description
+        } else {
+            cell.mainBgView.removeFromSuperview()
+        }
         return cell
     }
     
