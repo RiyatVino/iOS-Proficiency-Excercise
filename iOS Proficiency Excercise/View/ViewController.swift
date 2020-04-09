@@ -13,6 +13,7 @@ import Foundation
 class ViewController: UIViewController {
         
     //MARK:- Variable Declarations
+    let baseURL = "https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json"
     let cellIdentifier = "RowsTableViewCell"
     let noDataText = "No data found!"
     let network: NetworkManager = NetworkManager.sharedInstance
@@ -124,7 +125,7 @@ class ViewController: UIViewController {
     //MARK:- getData API Service call
     func getData() {
         startAnimating()
-        APIManager.sharedInstance.getData(onSuccess: { data in
+        APIManager.sharedInstance.getData(baseURL: baseURL, onSuccess: { data in
             DispatchQueue.main.async {
                 do {
                     let jsonDecoder = JSONDecoder()

@@ -10,10 +10,8 @@ import UIKit
 
 class APIManager: NSObject {
 
-     let baseURL = "https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json"
-
         static let sharedInstance = APIManager()
-        func getData(onSuccess: @escaping(Data) -> Void, onFailure: @escaping(Error) -> Void) {
+    func getData(baseURL: String, onSuccess: @escaping(Data) -> Void, onFailure: @escaping(Error) -> Void) {
         let url : String = baseURL
         let request: NSMutableURLRequest = NSMutableURLRequest(url: NSURL(string: url)! as URL)
         request.httpMethod = "GET"
