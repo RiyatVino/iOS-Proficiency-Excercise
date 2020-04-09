@@ -10,8 +10,9 @@
 		27339960243C89CC00CA8D07 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2733995F243C89CC00CA8D07 /* NetworkManager.swift */; };
 		27339962243C908600CA8D07 /* RefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27339961243C908600CA8D07 /* RefreshControl.swift */; };
 		27339964243C935300CA8D07 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27339963243C935300CA8D07 /* APIManager.swift */; };
+		27392027243EEB84003CA887 /* Pods_iOS_Proficiency_Excercise.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27392026243EEB84003CA887 /* Pods_iOS_Proficiency_Excercise.framework */; };
+		27392028243EEB8B003CA887 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27528CE2243C681B006D8EE4 /* SystemConfiguration.framework */; };
 		27528CDB243C3E87006D8EE4 /* RowsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27528CDA243C3E87006D8EE4 /* RowsTableViewCell.swift */; };
-		27528CE3243C681B006D8EE4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27528CE2243C681B006D8EE4 /* SystemConfiguration.framework */; };
 		27AFBC25243B824800B5E37D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AFBC24243B824800B5E37D /* AppDelegate.swift */; };
 		27AFBC27243B824800B5E37D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AFBC26243B824800B5E37D /* SceneDelegate.swift */; };
 		27AFBC29243B824800B5E37D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AFBC28243B824800B5E37D /* ViewController.swift */; };
@@ -20,7 +21,6 @@
 		27AFBC3C243B824C00B5E37D /* iOS_Proficiency_ExcerciseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AFBC3B243B824C00B5E37D /* iOS_Proficiency_ExcerciseTests.swift */; };
 		27AFBC49243B8A1000B5E37D /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AFBC47243B8A1000B5E37D /* MainModel.swift */; };
 		27AFBC4A243B8A1000B5E37D /* RowsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AFBC48243B8A1000B5E37D /* RowsModel.swift */; };
-		A9D82434C2405C3B286794F7 /* Pods_iOS_Proficiency_Excercise.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD17C9363142C3CF75EF129B /* Pods_iOS_Proficiency_Excercise.framework */; };
 		AA7BC5AB2FC183BE35271886 /* Pods_iOS_Proficiency_ExcerciseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3F655C82A9B81AB23436C4A /* Pods_iOS_Proficiency_ExcerciseTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +39,7 @@
 		2733995F243C89CC00CA8D07 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		27339961243C908600CA8D07 /* RefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshControl.swift; sourceTree = "<group>"; };
 		27339963243C935300CA8D07 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		27392026243EEB84003CA887 /* Pods_iOS_Proficiency_Excercise.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_iOS_Proficiency_Excercise.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27528CDA243C3E87006D8EE4 /* RowsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowsTableViewCell.swift; sourceTree = "<group>"; };
 		27528CE2243C681B006D8EE4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		27AFBC21243B824800B5E37D /* iOS Proficiency Excercise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS Proficiency Excercise.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,8 +66,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27528CE3243C681B006D8EE4 /* SystemConfiguration.framework in Frameworks */,
-				A9D82434C2405C3B286794F7 /* Pods_iOS_Proficiency_Excercise.framework in Frameworks */,
+				27392028243EEB8B003CA887 /* SystemConfiguration.framework in Frameworks */,
+				27392027243EEB84003CA887 /* Pods_iOS_Proficiency_Excercise.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +168,7 @@
 		8E73ADC0C74D9815E89FA83A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				27392026243EEB84003CA887 /* Pods_iOS_Proficiency_Excercise.framework */,
 				27528CE2243C681B006D8EE4 /* SystemConfiguration.framework */,
 				CD17C9363142C3CF75EF129B /* Pods_iOS_Proficiency_Excercise.framework */,
 				D3F655C82A9B81AB23436C4A /* Pods_iOS_Proficiency_ExcerciseTests.framework */,
@@ -276,7 +278,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		27159CD0243DCF8F00DD9F74 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputFileListPaths = (
@@ -287,7 +289,7 @@
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n  swiftlint\nelseecho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};

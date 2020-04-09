@@ -155,7 +155,7 @@ extension ViewController: UITableViewDelegate,UITableViewDataSource {
     
     //MARK: tableview : numberOfRowsInSection
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if mainData?.rowsValue == nil {
+        if mainData?.rowsValue?.count == 0 {
             noDataLabel.isHidden = false
         } else {
             noDataLabel.isHidden = true
