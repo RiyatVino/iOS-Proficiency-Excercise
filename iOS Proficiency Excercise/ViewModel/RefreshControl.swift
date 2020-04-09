@@ -41,10 +41,10 @@ class RefreshControl: UIRefreshControl {
 
     func refreshActivityIndicatorView() {
         guard let selector = actionSelector else { return }
-        let _isRefreshing = isRefreshing
+        let isRefreshingData = isRefreshing
         removeTarget(actionTarget, action: selector, for: .valueChanged)
         endRefreshing()
-        if _isRefreshing { beginRefreshing() }
+        if isRefreshingData { beginRefreshing() }
         addTarget()
     }
 

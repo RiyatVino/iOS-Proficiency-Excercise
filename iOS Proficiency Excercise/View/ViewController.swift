@@ -43,10 +43,8 @@ class ViewController: UIViewController {
         indicator.hidesWhenStopped = true
     }
  
-
-    
     //MARK:- setupTableView
-    func setupTableView(){
+    func setupTableView() {
         //Setting homeListTbl
         tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -54,7 +52,8 @@ class ViewController: UIViewController {
         tableView.delegate = self
         tableView.backgroundColor = UIColor.clear
         tableView.register(RowsTableViewCell.self, forCellReuseIdentifier: cellIdentifier)
-        noDataLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height:tableView.bounds.size.height))
+        noDataLabel = UILabel(frame:
+            CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height:tableView.bounds.size.height))
         noDataLabel.text = noDataText
         noDataLabel.textColor = UIColor.black
         noDataLabel.textAlignment = .center
@@ -77,9 +76,13 @@ class ViewController: UIViewController {
     }
     
     //MARK:- Common UIAlertView
-    func showAlert(_ title: String, _ message: String, _ buttonTitle: String){
-        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertAction.Style.default, handler: nil))
+    func showAlert(_ title: String, _ message: String, _ buttonTitle: String) {
+        let alert = UIAlertController(title: "Alert",
+                                      message: message,
+                                      preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Dismiss",
+                                      style: UIAlertAction.Style.default,
+                                      handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
    
@@ -100,7 +103,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Refresh", style: .plain, target: self, action: #selector(self.refreshData))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Refresh",
+                                                            style: .plain,
+                                                            target: self,
+                                                            action: #selector(self.refreshData))
         
         activityIndicator()
         NetworkManager.isUnreachable { _ in
@@ -116,8 +122,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     //MARK:- getData API Service call
-    func getData()
-    {
+    func getData() {
         startAnimating()
         APIManager.sharedInstance.getData(onSuccess: { data in
             DispatchQueue.main.async {
@@ -125,7 +130,7 @@ class ViewController: UIViewController {
                     let jsonDecoder = JSONDecoder()
                     self.mainData = try jsonDecoder.decode(MainModel.self, from: data)
                     DispatchQueue.main.async {
-                        self.navigationItem.title = self.mainData?.title
+                        self.navigationItem.title = self.mainData?.titleValue
                         self.tableView.reloadData()
                         self.refreshControl.endRefreshing()
                         self.stopAnimating()
@@ -141,36 +146,40 @@ class ViewController: UIViewController {
 }
 
 //MARK:- tableview
-extension ViewController: UITableViewDelegate,UITableViewDataSource{
+extension ViewController: UITableViewDelegate,UITableViewDataSource {
     
     //MARK: tableview : numberOfSections
-    func numberOfSections(in tableView: UITableView) -> Int{
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     //MARK: tableview : numberOfRowsInSection
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if mainData?.rows?.count == 0 {
+        if mainData?.rowsValue == nil {
             noDataLabel.isHidden = false
         } else {
             noDataLabel.isHidden = true
         }
-        return mainData?.rows?.count ?? 0
+        return mainData?.rowsValue?.count ?? 0
     }
     
     //MARK: tableview : cellForRowAtIndexPath
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //table view cell
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! RowsTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier,
+                                                         for: indexPath) as? RowsTableViewCell else {
+               // you can have your custom error
+               // return the default cell as method return expect it
+               return UITableViewCell()
+        }
         cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         cell.selectionStyle = .none
-        if mainData?.rows?[indexPath.row].title != nil
-        {
-            let url = URL(string: "\(mainData?.rows?[indexPath.row].imageHref ?? "")")
+        if mainData?.rowsValue?[indexPath.row].titleValue != nil {
+            let url = URL(string: "\(mainData?.rowsValue?[indexPath.row].imageHrefValue ?? "")")
             let imagep = #imageLiteral(resourceName: "placeholderimage")
             cell.imageRefView.sd_setImage(with: url, placeholderImage: imagep, options: [], completed: nil)
-            cell.titleLabel.text = mainData?.rows?[indexPath.row].title?.uppercased()
-            cell.descriptionLabel.text = mainData?.rows?[indexPath.row].description
+            cell.titleLabel.text = mainData?.rowsValue?[indexPath.row].titleValue?.uppercased()
+            cell.descriptionLabel.text = mainData?.rowsValue?[indexPath.row].descriptionValue
         } else {
             cell.mainBgView.removeFromSuperview()
         }
@@ -178,10 +187,9 @@ extension ViewController: UITableViewDelegate,UITableViewDataSource{
     }
     
     //MARK: tableview - heightForRowAt
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat{
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
       
-        if mainData?.rows?[indexPath.row].title == nil
-        {
+        if mainData?.rowsValue?[indexPath.row].titleValue == nil {
             return 0
         } else {
             return UITableView.automaticDimension
@@ -189,19 +197,25 @@ extension ViewController: UITableViewDelegate,UITableViewDataSource{
     }
     
     //MARK: tableview - didSelectRowAt
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //toggleRows
     }
     
     //MARK: tableview - calculateHeight of Cell
-    func calculateHeight(inString:String) -> CGFloat
-    {
-        let messageString = inString
-        let attributes = NSDictionary.init(object: UIFont.systemFont(ofSize: 15.0), forKey:NSAttributedString.Key.font as NSCopying)
+    func calculateHeight(inString:String) -> CGFloat {
+        let message = inString
+        let attributes = NSDictionary.init(object: UIFont.systemFont(ofSize: 15.0),
+                                           forKey:NSAttributedString.Key.font as NSCopying)
         
-        let attributedString : NSAttributedString = NSAttributedString(string: messageString, attributes: attributes as? [NSAttributedString.Key : Any])
+        let attributedString : NSAttributedString = NSAttributedString(string: message,
+                                                                       attributes:
+            attributes as? [NSAttributedString.Key : Any])
         
-        let rect : CGRect = attributedString.boundingRect(with: CGSize(width: 222.0, height: CGFloat.greatestFiniteMagnitude), options: .usesLineFragmentOrigin, context: nil)
+        let rect : CGRect = attributedString.boundingRect(with:
+            CGSize(width: 222.0,
+                   height: CGFloat.greatestFiniteMagnitude),
+                                                          options: .usesLineFragmentOrigin,
+                                                          context: nil)
         
         let requredSize:CGRect = rect
         return requredSize.height
@@ -223,7 +237,9 @@ public extension UITableView {
         myRefreshControl?.refreshActivityIndicatorView()
         guard   let refreshControl = refreshControl,
                 contentOffset.y != -refreshControl.frame.height else { return }
-        setContentOffset(CGPoint(x: 0, y: -(refreshControl.frame.height + 75)), animated: changeContentOffsetWithAnimation)
+        setContentOffset(CGPoint(x: 0,
+                                 y: -(refreshControl.frame.height + 75)),
+                         animated: changeContentOffsetWithAnimation)
     }
 
     private var canStartRefreshing: Bool {

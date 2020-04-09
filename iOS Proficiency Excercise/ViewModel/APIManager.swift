@@ -13,16 +13,16 @@ class APIManager: NSObject {
      let baseURL = "https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json"
 
         static let sharedInstance = APIManager()
-        
-        func getData(onSuccess: @escaping(Data) -> Void, onFailure: @escaping(Error) -> Void){
+        func getData(onSuccess: @escaping(Data) -> Void, onFailure: @escaping(Error) -> Void) {
         let url : String = baseURL
         let request: NSMutableURLRequest = NSMutableURLRequest(url: NSURL(string: url)! as URL)
         request.httpMethod = "GET"
         let session = URLSession.shared
-        let task = session.dataTask(with: request as URLRequest, completionHandler: {data, response, error -> Void in
-            if(error != nil){
+        let task = session.dataTask(with: request as URLRequest,
+                                    completionHandler: {data, _, error -> Void in
+            if(error != nil) {
                 onFailure(error!)
-            } else{
+            } else {
                 guard let data = data else {
                     print(String(describing: error))
                     return
@@ -34,6 +34,4 @@ class APIManager: NSObject {
         })
         task.resume()
     }
-
-    
 }

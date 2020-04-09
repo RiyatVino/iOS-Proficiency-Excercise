@@ -58,29 +58,37 @@ class RowsTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         self.contentView.addSubview(mainBgView)
-        mainBgView.topAnchor.constraint(equalTo:self.contentView.topAnchor,constant: 8).isActive = true
-        mainBgView.leadingAnchor.constraint(equalTo:self.contentView.leadingAnchor,constant: 8).isActive = true
-        mainBgView.trailingAnchor.constraint(equalTo:self.contentView.trailingAnchor,constant: -8).isActive = true
-        mainBgView.bottomAnchor.constraint(equalTo:self.contentView.bottomAnchor,constant: -8).isActive = true
+        NSLayoutConstraint.activate([
+        mainBgView.topAnchor.constraint(equalTo:self.contentView.topAnchor,constant: 8),
+        mainBgView.leadingAnchor.constraint(equalTo:self.contentView.leadingAnchor,constant: 8),
+        mainBgView.trailingAnchor.constraint(equalTo:self.contentView.trailingAnchor,constant: -8),
+        mainBgView.bottomAnchor.constraint(equalTo:self.contentView.bottomAnchor,constant: -8)
+            ])
         
         mainBgView.addSubview(titleLabel)
-        titleLabel.topAnchor.constraint(equalTo:mainBgView.topAnchor).isActive = true
-        titleLabel.leadingAnchor.constraint(equalTo:mainBgView.leadingAnchor).isActive = true
-        titleLabel.trailingAnchor.constraint(equalTo:mainBgView.trailingAnchor).isActive = true
-        titleLabel.heightAnchor.constraint(equalToConstant:40).isActive = true
+        NSLayoutConstraint.activate([
+        titleLabel.topAnchor.constraint(equalTo:mainBgView.topAnchor),
+        titleLabel.leadingAnchor.constraint(equalTo:mainBgView.leadingAnchor),
+        titleLabel.trailingAnchor.constraint(equalTo:mainBgView.trailingAnchor),
+        titleLabel.heightAnchor.constraint(equalToConstant:40)
+            ])
         
         mainBgView.addSubview(imageRefView)
         let leftSpacing = (self.contentView.frame.size.width/3)/2
-        imageRefView.topAnchor.constraint(equalTo:titleLabel.bottomAnchor,constant: 0).isActive = true
-        imageRefView.leadingAnchor.constraint(equalTo:mainBgView.leadingAnchor,constant: leftSpacing).isActive = true
-        imageRefView.trailingAnchor.constraint(equalTo:mainBgView.trailingAnchor,constant: -leftSpacing).isActive = true
-        imageRefView.heightAnchor.constraint(equalToConstant:150).isActive = true
+        NSLayoutConstraint.activate([
+        imageRefView.topAnchor.constraint(equalTo:titleLabel.bottomAnchor,constant: 0),
+        imageRefView.leadingAnchor.constraint(equalTo:mainBgView.leadingAnchor,constant: leftSpacing),
+        imageRefView.trailingAnchor.constraint(equalTo:mainBgView.trailingAnchor,constant: -leftSpacing),
+        imageRefView.heightAnchor.constraint(equalToConstant:150)
+        ])
         
         mainBgView.addSubview(descriptionLabel)
-        descriptionLabel.topAnchor.constraint(equalTo:imageRefView.bottomAnchor,constant: 0).isActive = true
-        descriptionLabel.leadingAnchor.constraint(equalTo:mainBgView.leadingAnchor,constant: 8).isActive = true
-        descriptionLabel.trailingAnchor.constraint(equalTo:mainBgView.trailingAnchor,constant: -8).isActive = true
-        descriptionLabel.bottomAnchor.constraint(equalTo:mainBgView.bottomAnchor,constant: -8).isActive = true
+        NSLayoutConstraint.activate([
+        descriptionLabel.topAnchor.constraint(equalTo:imageRefView.bottomAnchor,constant: 0),
+        descriptionLabel.leadingAnchor.constraint(equalTo:mainBgView.leadingAnchor,constant: 8),
+        descriptionLabel.trailingAnchor.constraint(equalTo:mainBgView.trailingAnchor,constant: -8),
+        descriptionLabel.bottomAnchor.constraint(equalTo:mainBgView.bottomAnchor,constant: -8)
+        ])
 
     }
     required init?(coder aDecoder: NSCoder) {

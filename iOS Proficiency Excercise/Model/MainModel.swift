@@ -1,19 +1,18 @@
-
 import Foundation
 struct MainModel : Codable {
-	let title : String?
-	let rows : [RowsModel]?
+	let titleValue : String?
+	let rowsValue : [RowsModel]?
 
 	enum CodingKeys: String, CodingKey {
 
-		case title = "title"
-		case rows = "rows"
+		case titleValue = "title"
+		case rowsValue = "rows"
 	}
 
 	init(from decoder: Decoder) throws {
 		let values = try decoder.container(keyedBy: CodingKeys.self)
-		title = try values.decodeIfPresent(String.self, forKey: .title)
-		rows = try values.decodeIfPresent([RowsModel].self, forKey: .rows)
+		titleValue = try values.decodeIfPresent(String.self, forKey: .titleValue)
+		rowsValue = try values.decodeIfPresent([RowsModel].self, forKey: .rowsValue)
 	}
 
 }
